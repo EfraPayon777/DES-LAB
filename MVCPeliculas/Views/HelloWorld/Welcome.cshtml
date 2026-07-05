@@ -1,0 +1,14 @@
+﻿<h1>Bienvenido</h1>
+
+@{
+    int numVeces = ViewData["numVeces"] != null ? (int)ViewData["numVeces"] : 1;
+    var nombre = ViewData["nombre"] ?? "";
+    var apellido = ViewData["apellido"] ?? "";
+}
+
+<ul>
+@for (int i = 1; i <= numVeces; i++)
+{
+    <li>Hola @nombre @apellido, veces mostrado = @i</li>
+}
+</ul>
