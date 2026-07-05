@@ -1,0 +1,37 @@
+@model IEnumerable<PersonaApp.Models.Persona>
+
+<h1>Listado de Personas</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Crear nueva persona</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>DUI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha nacimiento</th>
+            <th>Correo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.DUI</td>
+            <td>@item.Nombre</td>
+            <td>@item.Apellido</td>
+            <td>@item.FechaNacimiento.ToString("yyyy-MM-dd")</td>
+            <td>@item.Email</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.DUI">Detalles</a> |
+                <a asp-action="Edit" asp-route-id="@item.DUI">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.DUI">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
