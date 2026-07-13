@@ -1,0 +1,30 @@
+@model Ejercicio_1_LAB_3.Models.Project
+
+@{
+    ViewData["Title"] = "Editar proyecto";
+}
+
+<h1>Editar proyecto</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" placeholder="Nombre del proyecto" title="Nombre del proyecto" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" placeholder="Descripción" title="Descripción"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label"></label>
+        <input asp-for="StartDate" type="date" class="form-control" title="Fecha de inicio" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

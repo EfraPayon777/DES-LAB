@@ -1,0 +1,35 @@
+@model Ejercicio_1_LAB_3.Models.Employee
+
+@{
+    ViewData["Title"] = "Editar empleado";
+}
+
+<h1>Editar empleado</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Nombre" title="Nombre" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" placeholder="Apellido" title="Apellido" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="HireDate" class="form-label"></label>
+        <input asp-for="HireDate" type="date" class="form-control" title="Fecha de contratación" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Position" class="form-label"></label>
+        <input asp-for="Position" class="form-control" placeholder="Puesto" title="Puesto" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

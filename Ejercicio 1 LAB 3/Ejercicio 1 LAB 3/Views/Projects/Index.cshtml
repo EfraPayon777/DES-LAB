@@ -1,0 +1,35 @@
+@model IEnumerable<Ejercicio_1_LAB_3.Models.Project>
+
+@{
+    ViewData["Title"] = "Proyectos";
+}
+
+<h1>Proyectos</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuevo proyecto</a>
+</p>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Inicio</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.StartDate.ToShortDateString()</td>
+            <td>
+                <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Ver</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

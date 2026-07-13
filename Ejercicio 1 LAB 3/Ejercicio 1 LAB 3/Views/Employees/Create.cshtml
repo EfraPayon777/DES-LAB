@@ -1,0 +1,49 @@
+@model Ejercicio_1_LAB_3.Models.Employee
+
+@{
+    ViewData["Title"] = "Crear empleado";
+}
+
+<h1>Crear empleado</h1>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @if (ViewData["ServerErrors"] is System.Collections.Generic.List<string> serverErrors && serverErrors.Any())
+    {
+        <div class="alert alert-danger">
+            <ul>
+            @foreach (var err in serverErrors)
+            {
+                <li>@err</li>
+            }
+            </ul>
+        </div>
+    }
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">Nombre</label>
+        <input asp-for="FirstName" class="form-control" placeholder="Nombre" title="Nombre" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Apellido</label>
+        <input asp-for="LastName" class="form-control" placeholder="Apellido" title="Apellido" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="HireDate" class="form-label">Fecha de contratación</label>
+        <input asp-for="HireDate" type="date" class="form-control" title="Fecha de contratación" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Position" class="form-label">Puesto</label>
+        <input asp-for="Position" class="form-control" placeholder="Puesto" title="Puesto" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,15 @@
+@model Ejercicio_1_LAB_3.Models.Employee
+
+@{
+    ViewData["Title"] = "Eliminar empleado";
+}
+
+<h1>Eliminar</h1>
+
+<p>¿Seguro que desea eliminar a <strong>@Model.FirstName @Model.LastName</strong>?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

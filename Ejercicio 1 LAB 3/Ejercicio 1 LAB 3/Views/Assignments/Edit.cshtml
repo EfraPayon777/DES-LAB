@@ -1,0 +1,39 @@
+@model Ejercicio_1_LAB_3.Models.Assignment
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Editar asignación";
+}
+
+<h1>Editar asignación</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="EmployeeId" class="form-label"></label>
+        @Html.DropDownListFor(m => m.EmployeeId, (SelectList)ViewData["EmployeeId"], "-- Seleccione --", new { @class = "form-select", title = "Empleado" })
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ProjectId" class="form-label"></label>
+        @Html.DropDownListFor(m => m.ProjectId, (SelectList)ViewData["ProjectId"], "-- Seleccione --", new { @class = "form-select", title = "Proyecto" })
+        <span asp-validation-for="ProjectId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AssignedDate" class="form-label"></label>
+        <input asp-for="AssignedDate" type="date" class="form-control" title="Fecha de asignación" />
+        <span asp-validation-for="AssignedDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Role" class="form-label"></label>
+        <input asp-for="Role" class="form-control" placeholder="Rol" title="Rol" />
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

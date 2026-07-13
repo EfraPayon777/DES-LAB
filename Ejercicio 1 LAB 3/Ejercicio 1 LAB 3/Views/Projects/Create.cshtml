@@ -1,0 +1,43 @@
+@model Ejercicio_1_LAB_3.Models.Project
+
+@{
+    ViewData["Title"] = "Crear proyecto";
+}
+
+<h1>Crear proyecto</h1>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @if (ViewData["ServerErrors"] is System.Collections.Generic.List<string> serverErrors && serverErrors.Any())
+    {
+        <div class="alert alert-danger">
+            <ul>
+            @foreach (var err in serverErrors)
+            {
+                <li>@err</li>
+            }
+            </ul>
+        </div>
+    }
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nombre del proyecto</label>
+        <input asp-for="Name" class="form-control" placeholder="Nombre del proyecto" title="Nombre del proyecto" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Descripción</label>
+        <textarea asp-for="Description" class="form-control" placeholder="Descripción" title="Descripción"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label">Fecha de inicio</label>
+        <input asp-for="StartDate" type="date" class="form-control" title="Fecha de inicio" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

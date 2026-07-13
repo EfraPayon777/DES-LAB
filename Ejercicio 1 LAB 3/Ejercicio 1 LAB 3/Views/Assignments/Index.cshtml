@@ -1,0 +1,39 @@
+@model IEnumerable<Ejercicio_1_LAB_3.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Asignaciones";
+}
+
+<h1>Asignaciones</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nueva asignación</a>
+</p>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Empleado</th>
+            <th>Proyecto</th>
+            <th>Fecha</th>
+            <th>Rol</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Employee?.FirstName @item.Employee?.LastName</td>
+            <td>@item.Project?.Name</td>
+            <td>@item.AssignedDate.ToShortDateString()</td>
+            <td>@item.Role</td>
+            <td>
+                <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Ver</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

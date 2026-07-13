@@ -1,0 +1,23 @@
+@model Ejercicio_1_LAB_3.Models.Assignment
+
+@{
+    ViewData["Title"] = "Detalles asignación";
+}
+
+<h1>Detalles</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Empleado</dt>
+    <dd class="col-sm-10">@Model.Employee?.FirstName @Model.Employee?.LastName</dd>
+
+    <dt class="col-sm-2">Proyecto</dt>
+    <dd class="col-sm-10">@Model.Project?.Name</dd>
+
+    <dt class="col-sm-2">Fecha</dt>
+    <dd class="col-sm-10">@Model.AssignedDate.ToShortDateString()</dd>
+
+    <dt class="col-sm-2">Rol</dt>
+    <dd class="col-sm-10">@Model.Role</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

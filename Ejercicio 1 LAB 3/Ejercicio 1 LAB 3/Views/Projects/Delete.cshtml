@@ -1,0 +1,15 @@
+@model Ejercicio_1_LAB_3.Models.Project
+
+@{
+    ViewData["Title"] = "Eliminar proyecto";
+}
+
+<h1>Eliminar</h1>
+
+<p>¿Seguro que desea eliminar el proyecto <strong>@Model.Name</strong>?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
