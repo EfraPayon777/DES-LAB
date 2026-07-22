@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCPeliculas.Models;
 using MVCPeliculas.Data;
@@ -14,9 +15,13 @@ public class PeliculaController : Controller
     }
 
     // GET: PELICULAS
-    public async Task<IActionResult> Index()    
+    public async Task<IActionResult> Index(string? searchString)
     {
-        return View(await _context.Peliculas.ToListAsync());
+        var peliculas = await _context.Peliculas
+            .Include(p => p.Genero)
+            .Where(p => string.IsNullOrEmpty(searchString) || p.Titulo.Contains(searchString))
+            .ToListAsync();
+        return View(peliculas);
     }
 
     // GET: PELICULAS/Details/5
@@ -28,6 +33,7 @@ public class PeliculaController : Controller
         }
 
         var pelicula = await _context.Peliculas
+            .Include(p => p.Genero)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (pelicula == null)
         {
@@ -40,6 +46,8 @@ public class PeliculaController : Controller
     // GET: PELICULAS/Create
     public IActionResult Create()
     {
+        var generos = _context.Generos.ToList();
+        ViewBag.GeneroId = new SelectList(generos, "Id", "Nombre");
         return View();
     }
 
@@ -48,7 +56,7 @@ public class PeliculaController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Titulo,FechaLanzamiento,Precio,Director,GeneroId,Genero")] Pelicula pelicula)
+    public async Task<IActionResult> Create(Pelicula pelicula)
     {
         if (ModelState.IsValid)
         {
@@ -56,6 +64,8 @@ public class PeliculaController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        var generos = await _context.Generos.ToListAsync();
+        ViewBag.GeneroId = new SelectList(generos, "Id", "Nombre", pelicula.GeneroId);
         return View(pelicula);
     }
 
@@ -72,6 +82,8 @@ public class PeliculaController : Controller
         {
             return NotFound();
         }
+        var generos = _context.Generos.ToList();
+        ViewBag.GeneroId = new SelectList(generos, "Id", "Nombre", pelicula.GeneroId);
         return View(pelicula);
     }
 
@@ -107,6 +119,8 @@ public class PeliculaController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
+        var generos = _context.Generos.ToList();
+        ViewBag.GeneroId = new SelectList(generos, "Id", "Nombre", pelicula.GeneroId);
         return View(pelicula);
     }
 
@@ -119,6 +133,7 @@ public class PeliculaController : Controller
         }
 
         var pelicula = await _context.Peliculas
+            .Include(p => p.Genero)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (pelicula == null)
         {
