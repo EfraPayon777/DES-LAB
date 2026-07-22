@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ejercicio_1_LAB_3.Data;
@@ -15,9 +17,16 @@ namespace Ejercicio_1_LAB_3.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString)
         {
-            return View(await _context.Projects.ToListAsync());
+            var q = _context.Projects.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                searchString = searchString.Trim();
+                q = q.Where(p => p.Name.Contains(searchString) || p.Description.Contains(searchString));
+                ViewData["CurrentFilter"] = searchString;
+            }
+            return View(await q.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -37,6 +46,12 @@ namespace Ejercicio_1_LAB_3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,StartDate")] Project project)
         {
+            // Example server-side validation: Name must not be empty (already covered by [Required]) and StartDate should not be unreasonably far in the past
+            if (project.StartDate < new DateTime(1900, 1, 1))
+            {
+                ModelState.AddModelError(nameof(project.StartDate), "La fecha de inicio no es válida.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(project);

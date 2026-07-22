@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ejercicio_1_LAB_3.Data;
@@ -16,11 +18,23 @@ namespace Ejercicio_1_LAB_3.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString)
         {
             var assignments = _context.Assignments
                 .Include(a => a.Employee)
-                .Include(a => a.Project);
+                .Include(a => a.Project)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                searchString = searchString.Trim();
+                assignments = assignments.Where(a => a.Role.Contains(searchString)
+                    || a.Employee.FirstName.Contains(searchString)
+                    || a.Employee.LastName.Contains(searchString)
+                    || a.Project.Name.Contains(searchString));
+                ViewData["CurrentFilter"] = searchString;
+            }
+
             return View(await assignments.ToListAsync());
         }
 
@@ -46,6 +60,33 @@ namespace Ejercicio_1_LAB_3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployeeId,ProjectId,AssignedDate,Role")] Assignment assignment)
         {
+            // Basic server-side validations
+            if (assignment.AssignedDate > DateTime.Today)
+            {
+                ModelState.AddModelError(nameof(assignment.AssignedDate), "La fecha de asignación no puede ser posterior a hoy.");
+            }
+
+            // Prevent duplicate assignment for same employee and project
+            if (_context.Assignments.Any(a => a.EmployeeId == assignment.EmployeeId && a.ProjectId == assignment.ProjectId))
+            {
+                ModelState.AddModelError(string.Empty, "Este empleado ya está asignado a este proyecto.");
+            }
+
+            // Ensure employee and project exist and dates make sense
+            var employee = await _context.Employees.FindAsync(assignment.EmployeeId);
+            var project = await _context.Projects.FindAsync(assignment.ProjectId);
+            if (employee == null) ModelState.AddModelError(nameof(assignment.EmployeeId), "Empleado no encontrado.");
+            if (project == null) ModelState.AddModelError(nameof(assignment.ProjectId), "Proyecto no encontrado.");
+
+            if (employee != null && assignment.AssignedDate < employee.HireDate)
+            {
+                ModelState.AddModelError(nameof(assignment.AssignedDate), "La fecha de asignación no puede ser anterior a la fecha de contratación del empleado.");
+            }
+            if (project != null && assignment.AssignedDate < project.StartDate)
+            {
+                ModelState.AddModelError(nameof(assignment.AssignedDate), "La fecha de asignación no puede ser anterior a la fecha de inicio del proyecto.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(assignment);

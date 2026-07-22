@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ejercicio_1_LAB_3.Data;
@@ -17,9 +19,16 @@ namespace Ejercicio_1_LAB_3.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString)
         {
-            return View(await _context.Employees.ToListAsync());
+            var q = _context.Employees.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                searchString = searchString.Trim();
+                q = q.Where(e => e.FirstName.Contains(searchString) || e.LastName.Contains(searchString) || e.Position.Contains(searchString));
+                ViewData["CurrentFilter"] = searchString;
+            }
+            return View(await q.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -40,6 +49,12 @@ namespace Ejercicio_1_LAB_3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName,LastName,HireDate,Position")] Employee employee)
         {
+            // Server-side validation: HireDate cannot be in the future
+            if (employee.HireDate > DateTime.Today)
+            {
+                ModelState.AddModelError(nameof(employee.HireDate), "La fecha de contratación no puede ser posterior a hoy.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(employee);
