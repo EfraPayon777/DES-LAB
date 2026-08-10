@@ -16,6 +16,9 @@ namespace Biblioteca.BL.AutoMapper
                 .ForMember(destination => destination.Nombre, opts => opts.MapFrom(source => source.Nombre))
                 .ForMember(destination => destination.Apellido, opts => opts.MapFrom(source => source.Apellido))
                 .ReverseMap();
+
+            CreateMap<Editorial, EditorialDto>().ReverseMap();
+            CreateMap<Libro, LibroDto>().ReverseMap();
         }
     }
 }

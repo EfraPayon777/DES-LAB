@@ -14,6 +14,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddAutoMapper(_ => { }, typeof(AutoMapperProfile));
         services.AddTransient<IAutorService, AutorService>();
+        services.AddTransient<IEditorialService, EditorialService>();
+        services.AddTransient<ILibroService, LibroService>();
         services.AddRepositoryConnector();
         return services;
     }

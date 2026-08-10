@@ -13,6 +13,8 @@ namespace Biblioteca.DAL.Services
         {
             services.AddTransient<IDatabaseRepository, DatabaseRepository>();
             services.AddTransient<IAutorRepository, AutorRepository>();
+            services.AddTransient<IEditorialRepository, EditorialRepository>();
+            services.AddTransient<ILibroRepository, LibroRepository>();
             return services;
         }
     }
