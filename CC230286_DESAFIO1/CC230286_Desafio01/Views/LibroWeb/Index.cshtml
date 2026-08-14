@@ -1,0 +1,34 @@
+@model IEnumerable<CC230396_Desafio01.Entities.Dtos.LibroDto>
+@{
+    ViewData["Title"] = "Lista de Libros";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Listado de Libros</h2>
+    <a href="/LibroWeb/Create" class="btn btn-success">Agregar Nuevo Libro</a>
+</div>
+<hr />
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Título</th>
+            <th>Fecha Publicación</th>
+            <th>ID Autor</th>
+            <th>ID Categoría</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Codigo</td>
+                <td>@item.Titulo</td>
+                <td>@item.FechaPublicacion.ToShortDateString()</td>
+                <td>@item.AutorId</td>
+                <td>@item.CategoriaId</td>
+            </tr>
+        }
+    </tbody>
+</table>

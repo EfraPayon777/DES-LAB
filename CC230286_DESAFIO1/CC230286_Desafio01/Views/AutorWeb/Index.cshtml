@@ -1,0 +1,30 @@
+@model IEnumerable<CC230396_Desafio01.Entities.Dtos.AutorDto>
+@{
+    ViewData["Title"] = "Lista de Autores";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Listado de Autores</h2>
+    <a href="/AutorWeb/Create" class="btn btn-success">Agregar Nuevo Autor</a>
+</div>
+<hr />
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Codigo</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellido</td>
+            </tr>
+        }
+    </tbody>
+</table>

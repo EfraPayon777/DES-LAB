@@ -1,0 +1,19 @@
+﻿@model CC230396_Desafio01.Entities.Dtos.CategoriaDto
+@{
+    ViewData["Title"] = "Registrar Categoría";
+}
+
+<h2>Formulario de Registro de Categorías</h2>
+<hr />
+
+<form asp-action="Create" method="post" class="w-50">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre de la Categoría:</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar Categoría</button>
+</form>

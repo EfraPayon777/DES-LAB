@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="../Biblioteca.BL/CC230396_Desafio01.BL.csproj" Id="b4396b66-90cc-42b9-9c14-4cd8b9505d8a" />
+  <Project Path="../Biblioteca.Common/CC230396_Desafio01.Common.csproj" Id="f1a64b11-73eb-4c20-8ce5-9d8cb3e571b1" />
+  <Project Path="../Biblioteca.DAL/CC230396_Desafio01.DAL.csproj" Id="f804d030-afbc-4a49-aad1-9ebb228e2675" />
+  <Project Path="../Biblioteca.Entities/CC230396_Desafio01.Entities.csproj" Id="0e6441dd-1e8a-4c58-a11b-ef6189eb46eb" />
+  <Project Path="CC230396_Desafio01.API.csproj" />
+</Solution>

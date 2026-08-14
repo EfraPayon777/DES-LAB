@@ -1,0 +1,6 @@
+@CC230286_Desafio01_HostAddress = http://localhost:5170
+
+GET {{CC230286_Desafio01_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

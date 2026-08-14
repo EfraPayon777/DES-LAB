@@ -1,0 +1,47 @@
+﻿@model CC230396_Desafio01.Entities.Dtos.LibroDto
+@{
+    ViewData["Title"] = "Registrar Libro";
+}
+
+<h2>Formulario de Registro de Libros</h2>
+<hr />
+
+
+<form asp-action="Create" method="post" class="w-50">
+
+  
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Título del Libro:</label>
+    
+        <input asp-for="Titulo" class="form-control" placeholder="Ej: Cien Años de Soledad" />
+       
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha de Publicación:</label>
+        <input asp-for="FechaPublicacion" type="date" class="form-control" />
+        <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Seleccione el Autor:</label>
+    
+        <select asp-for="AutorId" class="form-select" asp-items="ViewBag.Autores">
+            <option value="">-- Seleccione una opción --</option>
+        </select>
+        <span asp-validation-for="AutorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Seleccione la Categoría:</label>
+        <select asp-for="CategoriaId" class="form-select" asp-items="ViewBag.Categorias">
+            <option value="">-- Seleccione una opción --</option>
+        </select>
+        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar Libro</button>
+</form>
