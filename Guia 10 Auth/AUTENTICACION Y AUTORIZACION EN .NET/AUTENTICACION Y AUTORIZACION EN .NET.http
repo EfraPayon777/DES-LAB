@@ -1,0 +1,51 @@
+@AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress = http://localhost:5244
+
+### GET all Marcas
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Marcas
+Accept: application/json
+
+###
+
+### GET Marca by Id (1)
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Marcas/Details/1
+Accept: application/json
+
+###
+
+### GET all Modelos
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Modelos
+Accept: application/json
+
+###
+
+### GET Modelo by Id (1)
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Modelos/Details/1
+Accept: application/json
+
+###
+
+### GET all Vehiculos
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Vehiculos
+Accept: application/json
+
+###
+
+### GET Vehiculo by Id (1)
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Vehiculos/Details/1
+Accept: application/json
+
+###
+
+### Create new Marca
+POST {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/Marcas/Create
+Content-Type: application/x-www-form-urlencoded
+
+Nombre=Nissan
+
+###
+
+### Original Weather Forecast endpoint
+GET {{AUTENTICACION_Y_AUTORIZACION_EN_.NET_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
