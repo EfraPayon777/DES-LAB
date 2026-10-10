@@ -1,0 +1,96 @@
+@HostAddress = http://localhost:5248
+
+### CLIENTES ###
+
+### Obtener todos los clientes
+GET {{HostAddress}}/api/clientes
+Accept: application/json
+
+### Obtener cliente por Id
+GET {{HostAddress}}/api/clientes/1
+Accept: application/json
+
+### Crear nuevo cliente
+POST {{HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Roberto",
+  "apellido": "Alvarado",
+  "email": "roberto.alvarado@example.com"
+}
+
+### Actualizar cliente
+PUT {{HostAddress}}/api/clientes/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Carlos Alberto",
+  "apellido": "Martinez",
+  "email": "carlos.martinez@example.com"
+}
+
+### Eliminar cliente
+DELETE {{HostAddress}}/api/clientes/3
+
+
+### PRODUCTOS ###
+
+### Obtener todos los productos
+GET {{HostAddress}}/api/productos
+Accept: application/json
+
+### Obtener producto por Id
+GET {{HostAddress}}/api/productos/1
+Accept: application/json
+
+### Crear nuevo producto
+POST {{HostAddress}}/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Auriculares Bluetooth Sony",
+  "descripcion": "Cancelación de ruido activa, 30 horas de batería",
+  "precio": 129.99,
+  "stock": 25
+}
+
+### Actualizar producto
+PUT {{HostAddress}}/api/productos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Laptop Dell Inspiron 15",
+  "descripcion": "Core i7 16GB RAM SSD 512GB Actualizada",
+  "precio": 949.99,
+  "stock": 12
+}
+
+### Eliminar producto
+DELETE {{HostAddress}}/api/productos/4
+
+
+### PEDIDOS ###
+
+### Obtener todos los pedidos
+GET {{HostAddress}}/api/pedidos
+Accept: application/json
+
+### Obtener pedido por Id
+GET {{HostAddress}}/api/pedidos/1
+Accept: application/json
+
+### Crear nuevo pedido
+POST {{HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cantidad": 2,
+  "clienteId": 1,
+  "productoId": 2
+}
+
+### Eliminar pedido
+DELETE {{HostAddress}}/api/pedidos/1

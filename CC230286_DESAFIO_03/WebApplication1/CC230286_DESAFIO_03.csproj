@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CC230286_DESAFIO_03.Entities\CC230286_DESAFIO_03.Entities.csproj" />
+    <ProjectReference Include="..\CC230286_DESAFIO_03.DAL\CC230286_DESAFIO_03.DAL.csproj" />
+    <ProjectReference Include="..\CC230286_DESAFIO_03.BL\CC230286_DESAFIO_03.BL.csproj" />
+  </ItemGroup>
+
+</Project>
