@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CC230286_DESAFIO_03.Entities/CC230286_DESAFIO_03.Entities.csproj" />
+  <Project Path="CC230286_DESAFIO_03.DAL/CC230286_DESAFIO_03.DAL.csproj" />
+  <Project Path="CC230286_DESAFIO_03.BL/CC230286_DESAFIO_03.BL.csproj" />
+  <Project Path="WebApplication1/CC230286_DESAFIO_03.csproj" />
+</Solution>
