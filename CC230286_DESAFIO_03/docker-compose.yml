@@ -10,6 +10,8 @@ services:
       - sqlserver-data:/var/opt/mssql
 
   api:
+    build:
+      context: .
     image: desafio03-api:latest
     ports:
       - "8081:8080"
