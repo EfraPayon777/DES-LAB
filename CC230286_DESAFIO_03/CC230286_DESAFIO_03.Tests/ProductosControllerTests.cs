@@ -54,4 +54,46 @@ public class ProductosControllerTests
         Assert.Equal(25.50m, guardado.Precio);
         Assert.Equal(10, guardado.Stock);
     }
+
+    [Fact]
+    public async Task Post_RechazaProducto_CuandoPrecioOStockSonInvalidos()
+    {
+        using var context = Setup.GetDatabaseContext();
+
+        var config = new MapperConfiguration(
+            cfg => cfg.AddProfile<AutoMapperProfile>(),
+            NullLoggerFactory.Instance);
+
+        var mapper = config.CreateMapper();
+
+        var repository = new ProductoRepository(context);
+        var service = new ProductoService(repository, mapper);
+        var controller = new ProductosController(service);
+
+        var productoPrecioInvalido = new ProductoDto
+        {
+            Nombre = "Producto sin precio",
+            Descripcion = "Producto de prueba",
+            Precio = 0,
+            Stock = 10
+        };
+
+        var productoStockInvalido = new ProductoDto
+        {
+            Nombre = "Producto sin stock valido",
+            Descripcion = "Producto de prueba",
+            Precio = 25.00m,
+            Stock = -5
+        };
+
+        var cantidadInicial = context.Productos.Count();
+
+        var resultadoPrecio = await controller.Post(productoPrecioInvalido);
+        var resultadoStock = await controller.Post(productoStockInvalido);
+
+        Assert.IsType<BadRequestObjectResult>(resultadoPrecio);
+        Assert.IsType<BadRequestObjectResult>(resultadoStock);
+
+        Assert.Equal(cantidadInicial, context.Productos.Count());
+    }
 }
