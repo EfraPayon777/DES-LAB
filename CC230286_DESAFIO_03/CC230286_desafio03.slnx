@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".dockerignore" />
+    <File Path="docker-compose.yml" />
+    <File Path="Dockerfile" />
+  </Folder>
   <Project Path="CC230286_DESAFIO_03.BL/CC230286_DESAFIO_03.BL.csproj" />
   <Project Path="CC230286_DESAFIO_03.DAL/CC230286_DESAFIO_03.DAL.csproj" />
   <Project Path="CC230286_DESAFIO_03.Entities/CC230286_DESAFIO_03.Entities.csproj" />

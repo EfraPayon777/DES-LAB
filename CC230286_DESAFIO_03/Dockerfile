@@ -24,6 +24,10 @@ RUN dotnet publish "WebApplication1/CC230286_DESAFIO_03.csproj" -c $BUILD_CONFIG
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS final
 
+RUN apk add --no-cache icu-libs icu-data-full
+
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 WORKDIR /app
 
 COPY --from=publish /app/publish .

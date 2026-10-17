@@ -9,5 +9,16 @@ services:
     volumes:
       - sqlserver-data:/var/opt/mssql
 
+  api:
+    image: desafio03-api:latest
+    ports:
+      - "8081:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__DefaultConnection: "Server=db;Database=CC230286_Desafio03Db;User Id=sa;Password=Admin123!;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True;"
+    depends_on:
+      - db
+
 volumes:
   sqlserver-data:
