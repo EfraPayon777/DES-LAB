@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="CC230286_DESAFIO_03.Tests/CC230286_DESAFIO_03.Tests.csproj" Id="92f892fc-8ee6-41f0-95ec-c05ff796ee0c" />
-  <Project Path="WebApplication1/CC230286_DESAFIO_03.csproj" />
   <Project Path="CC230286_DESAFIO_03.BL/CC230286_DESAFIO_03.BL.csproj" />
   <Project Path="CC230286_DESAFIO_03.DAL/CC230286_DESAFIO_03.DAL.csproj" />
   <Project Path="CC230286_DESAFIO_03.Entities/CC230286_DESAFIO_03.Entities.csproj" />
+  <Project Path="CC230286_DESAFIO_03.Tests/CC230286_DESAFIO_03.Tests.csproj" Id="92f892fc-8ee6-41f0-95ec-c05ff796ee0c" />
+  <Project Path="WebApplication1/CC230286_DESAFIO_03.csproj" />
 </Solution>
